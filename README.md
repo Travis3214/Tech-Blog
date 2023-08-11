@@ -32,7 +32,7 @@
   Link to Heroku goes here
 
 ## Display
-  ![1](link)
+  ![Screenshots coming soon](link)
 
 ## License
   https://mit-license.org/
