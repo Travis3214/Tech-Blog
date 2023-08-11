@@ -3,7 +3,7 @@ const { Comment } = require('../../models');
 
 const withAuth = require('../../utils/auth');
 
-router.get('/', async (req, res) => {
+router.get('/', withAuth, async (req, res) => {
     try{
         const commentData = Comment.findAll();
         res.status(200).json(commentData);
@@ -11,6 +11,22 @@ router.get('/', async (req, res) => {
         res.status(500).json(err)
     }
 });
+
+router.get('/:id', withAuth, async (req, res) => {
+    try{
+        const commentData = Comment.findByPk(req.params.id);
+
+        if(!commentData) {
+            res.status(404).json({message: 'No comment found with this id!'});
+            return;
+        }
+
+        res.status(200).json(commentData);
+    } catch (err) {
+        res.status(500).json(err)
+    }
+});
+
 
 router.post('/', withAuth, async (req, res) => {
   try {
